@@ -21,18 +21,20 @@ logger = logging.getLogger("main_script") # get name for the logger
 from logger import Logger
 
 # output directory: 
-output_directory = "/scratch/edwin/aquifer_thickness_5arcmin_world_final/" 
+#~ output_directory = "/scratch/edwin/aquifer_thickness_5arcmin_world_final/" 
+output_directory = "/p/1209496-pcrglobwb/scratch_edwin/test_aquifer_thickness" 
 cleanOutputDir   = True
 
 # clone map 
 #~ clone_map_file = "/data/hydroworld/others/RhineMeuse/RhineMeuse05min.clone.map"
 #~ clone_map_file = "/data/hydroworld/PCRGLOBWB20/input5min/routing/lddsound_05min.map"
 #~ clone_map_file = "/scratch/edwin/tmp/Australia05min.clone.map"
-clone_map_file = "/scratch/edwin/processing_whymap/version_19september2014/water_polygon/water-polygons-split-4326/landmask_05min.map"
+#~ clone_map_file = "/scratch/edwin/processing_whymap/version_19september2014/water_polygon/water-polygons-split-4326/landmask_05min.map"
+clone_map_file = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/Java/Java05min.clone.map"
 
 # number_of_samples and option to include_percentile_report
-number_of_samples         = 1000
-number_of_cores           = 10
+number_of_samples         = 5 # 1000
+number_of_cores           = 1 # 10
 include_percentile_report = False
 
 # sedimentary basin output file:
@@ -57,21 +59,23 @@ sedimentary_basin_netcdf['attribute']['comment'    ]  = "Processed and calculate
 # input files:
 #
 dem_average_netcdf = {}
-dem_average_netcdf['file_name']        = "/scratch/edwin/floodplain_5arcmin_world_final/topography_parameters_05_arcmin.nc"
+#~ dem_average_netcdf['file_name']     = "/scratch/edwin/floodplain_5arcmin_world_final/topography_parameters_05_arcmin.nc"
+dem_average_netcdf['file_name']        = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/floodplain_05arcmin_world_final/based_on_daily_runoff/topography_parameters_5_arcmin_october_2015.nc"
 dem_average_netcdf['variable_name']    = "dem_average"
 #
 dem_floodplain_netcdf = {}
-dem_floodplain_netcdf['file_name']     = "/scratch/edwin/floodplain_5arcmin_world_final/channel_parameters_05_arcmin.nc"
+#~ dem_floodplain_netcdf['file_name']  = "/scratch/edwin/floodplain_5arcmin_world_final/channel_parameters_05_arcmin.nc"
+dem_floodplain_netcdf['file_name']     = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/floodplain_05arcmin_world_final/based_on_daily_runoff/channel_parameters_5_arcmin_october_2015.nc"
 dem_floodplain_netcdf['variable_name'] = "dem_floodplain"
 #
 ldd_netcdf = {}
-ldd_netcdf['file_name']                = "/scratch/edwin/floodplain_5arcmin_world_final/channel_parameters_05_arcmin.nc"
+ldd_netcdf['file_name']                = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/floodplain_05arcmin_world_final/based_on_daily_runoff/channel_parameters_5_arcmin_october_2015.nc"
 ldd_netcdf['variable_name']            = "lddMap"
 
 # table/figure of Margat
 margat_aquifers = {}
-margat_aquifers['shapefile'] = "/scratch/edwin/processing_whymap/version_19september2014/whymap_wgs1984.shp"
-margat_aquifers['txt_table'] = "/scratch/edwin/processing_whymap/version_19september2014/table/margat_table.txt"
+margat_aquifers['shapefile'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/processing_whymap/whymap_wgs1984.shp"
+margat_aquifers['txt_table'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/processing_whymap/margat_table.txt"
 
 # TODO: include the parameterization of kSat and Sy
 
@@ -87,8 +91,8 @@ def main():
     table_path = str(os.getcwd()+"/")
     print(table_path)
     
-    table_thickness = table_path+"table_from_inge/lookupDepth.txt"
-    table_zscore    = table_path+"table_from_inge/zscore.txt"
+    table_thickness = table_path + "table_from_inge/lookupDepth.txt"
+    table_zscore    = table_path + "table_from_inge/zscore.txt"
     
     # change the current directory/path to output directory
     os.chdir(output_directory)
