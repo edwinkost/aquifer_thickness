@@ -58,11 +58,11 @@ thickness_05min_netcdf['var_name']    = "average_corrected"
 
 # input file: aquifer properties at 5arc min resolution  - from Gleeson et al.
 aquifer_properties_05min_netcdf = {}
-aquifer_properties_05min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/input5min/groundwater/groundwaterProperties5ArcMin.nc"
+aquifer_properties_05min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/PCRGLOBWB20/input5min/groundwater/groundwaterProperties5ArcMin.nc"
 
 # input file: aquifer properties at 30arc min resolution - from Gleeson et al.
 aquifer_properties_30min_netcdf = {}
-aquifer_properties_30min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/input30min/groundwater/groundwaterProperties.nc"
+aquifer_properties_30min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/PCRGLOBWB20/input30min/groundwater/groundwaterProperties.nc"
 
 
 def main():
