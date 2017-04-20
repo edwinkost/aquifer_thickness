@@ -21,9 +21,12 @@ logger = logging.getLogger("main_script") # get name for the logger
 from logger import Logger
 
 # output directory: 
-output_directory      = "/scratch/edwin/aquifer_properties/" 
-output_05min_filename = "/scratch/edwin/aquifer_properties/groundwater_properties_05min.nc"
-output_30min_filename = "/scratch/edwin/aquifer_properties/groundwater_properties_30min.nc"
+#~ output_directory      = "/scratch/edwin/aquifer_properties/" 
+#~ output_05min_filename = "/scratch/edwin/aquifer_properties/groundwater_properties_05min.nc"
+#~ output_30min_filename = "/scratch/edwin/aquifer_properties/groundwater_properties_30min.nc"
+output_directory         = "/p/1209496-pcrglobwb/scratch_edwin/test_aquifer_properties/" 
+output_05min_filename    = output_directory + "/groundwater_properties_05min.nc"
+output_30min_filename    = output_directory + "/groundwater_properties_30min.nc"
 cleanOutputDir   = True
 
 # netcdf attributes:
@@ -37,21 +40,29 @@ netcdf_attributes['description']  = "None"
 netcdf_attributes['comment'    ]  = "Processed and calculated by Edwin H. Sutanudjaja (e-mail: E.H.Sutanudjaja@uu.nl" 
 
 # clone/landmask maps at 05 arc min and 30 arc min resolution
-clone_map_05min_file = "/scratch/edwin/processing_whymap/version_19september2014/water_polygon/water-polygons-split-4326/landmask_05min.map"
-clone_map_30min_file = "/data/hydroworld/PCRGLOBWB20/input30min/routing/lddsound_30min.map"
+# - for the entire world
+#~ clone_map_05min_file = "/scratch/edwin/processing_whymap/version_19september2014/water_polygon/water-polygons-split-4326/landmask_05min.map"
+#~ clone_map_30min_file = "/data/hydroworld/PCRGLOBWB20/input30min/routing/lddsound_30min.map"
+# - Rhine Meuse example:
+clone_map_05min_file    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/RhineMeuse/RhineMeuse05min.landmask.map"
+clone_map_30min_file    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/RhineMeuse/RhineMeuse30min.landmask.map"
 
 # input file: thickness properties at 30arc min resolution
 thickness_05min_netcdf = {}
-thickness_05min_netcdf['filename'] = "/scratch/edwin/aquifer_thickness_5arcmin_world_final/sedimentary_basin_05_arcmin.nc" 
-thickness_05min_netcdf['var_name'] = "average_corrected"
+# - output from the script to estimate "aquifer thickness"
+thickness_05min_netcdf['filename']    = "/p/1209496-pcrglobwb/scratch_edwin/test_aquifer_thickness/sedimentary_basin_05_arcmin.nc" 
+# - using the corrected values based on Margat's table
+thickness_05min_netcdf['var_name']    = "average_corrected"
+#~ # - using the non-corrected values
+#~ thickness_05min_netcdf['var_name'] = "average"
 
-# input file: aquifer properties at 30arc min resolution
+# input file: aquifer properties at 5arc min resolution  - from Gleeson et al.
 aquifer_properties_05min_netcdf = {}
-aquifer_properties_05min_netcdf['filename'] = "/data/hydroworld/PCRGLOBWB20/input5min/groundwater/groundwaterProperties5ArcMin.nc"
+aquifer_properties_05min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/input5min/groundwater/groundwaterProperties5ArcMin.nc"
 
-# input file: aquifer properties at 30arc min resolution
+# input file: aquifer properties at 30arc min resolution - from Gleeson et al.
 aquifer_properties_30min_netcdf = {}
-aquifer_properties_30min_netcdf['filename'] = "/data/hydroworld/PCRGLOBWB20/input30min/groundwater/groundwaterProperties.nc"
+aquifer_properties_30min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/input30min/groundwater/groundwaterProperties.nc"
 
 
 def main():
