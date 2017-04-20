@@ -45,7 +45,7 @@ netcdf_attributes['comment'    ]  = "Processed and calculated by Edwin H. Sutanu
 #~ clone_map_30min_file = "/data/hydroworld/PCRGLOBWB20/input30min/routing/lddsound_30min.map"
 # - Rhine Meuse example:
 clone_map_05min_file    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/RhineMeuse/RhineMeuse05min.landmask.map"
-clone_map_30min_file    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/RhineMeuse/RhineMeuse30min.landmask.map"
+#~ clone_map_30min_file    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/RhineMeuse/RhineMeuse30min.landmask.map"
 
 # input file: thickness properties at 30arc min resolution
 thickness_05min_netcdf = {}
@@ -60,9 +60,9 @@ thickness_05min_netcdf['var_name']    = "average_corrected"
 aquifer_properties_05min_netcdf = {}
 aquifer_properties_05min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/PCRGLOBWB20/input5min/groundwater/groundwaterProperties5ArcMin.nc"
 
-# input file: aquifer properties at 30arc min resolution - from Gleeson et al.
-aquifer_properties_30min_netcdf = {}
-aquifer_properties_30min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/PCRGLOBWB20/input30min/groundwater/groundwaterProperties.nc"
+#~ # input file: aquifer properties at 30arc min resolution - from Gleeson et al.
+#~ aquifer_properties_30min_netcdf = {}
+#~ aquifer_properties_30min_netcdf['filename'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/PCRGLOBWB20/input30min/groundwater/groundwaterProperties.nc"
 
 
 def main():
@@ -128,52 +128,52 @@ def main():
     output_05min_netcdf.changeAtrribute(output_05min_filename,netcdf_attributes)
     output_05min_netcdf.data2NetCDF(    output_05min_filename,variable_names,variable_fields)
 
-    logger.info('Start processing for 30 arc-min resolution!')
+    #~ logger.info('Start processing for 30 arc-min resolution!')
 
-    # upscaling thickness to 30 arc min resolution
-    logger.info('Upscaling thickness from 5 arc-min resolution to 30 arc-min!')
-    thickness_05min_array = pcr.pcr2numpy(thickness, vos.MV)
-    thickness_30min_array = vos.regridToCoarse(thickness_05min_array, 30./5.,"average")
-    #
-    # set clone for 30 arc min resolution
-    pcr.setclone(clone_map_30min_file)
-    #
-    landmask  = pcr.defined(clone_map_30min_file)
-    thickness = pcr.ifthen(landmask, 
-                pcr.numpy2pcr(pcr.Scalar, thickness_30min_array, vos.MV))
-    #
-    # update landmask
-    landmask  = pcr.defined(thickness)            
+    #~ # upscaling thickness to 30 arc min resolution
+    #~ logger.info('Upscaling thickness from 5 arc-min resolution to 30 arc-min!')
+    #~ thickness_05min_array = pcr.pcr2numpy(thickness, vos.MV)
+    #~ thickness_30min_array = vos.regridToCoarse(thickness_05min_array, 30./5.,"average")
+    #~ #
+    #~ # set clone for 30 arc min resolution
+    #~ pcr.setclone(clone_map_30min_file)
+    #~ #
+    #~ landmask  = pcr.defined(clone_map_30min_file)
+    #~ thickness = pcr.ifthen(landmask, 
+                #~ pcr.numpy2pcr(pcr.Scalar, thickness_30min_array, vos.MV))
+    #~ #
+    #~ # update landmask
+    #~ landmask  = pcr.defined(thickness)            
 
-    # read aquifer properties at 30 arc min resolution
-    logger.info('Reading saturated conductivity and specific yield at 30 arc-min resolution!')
-    saturated_conductivity = pcr.ifthen(landmask,\
-                             vos.netcdf2PCRobjCloneWithoutTime(\
-                             aquifer_properties_30min_netcdf['filename'],\
-                             "kSatAquifer"  , clone_map_30min_file))
-    specific_yield         = pcr.ifthen(landmask,\
-                             vos.netcdf2PCRobjCloneWithoutTime(\
-                             aquifer_properties_30min_netcdf['filename'],\
-                             "specificYield", clone_map_30min_file))
+    #~ # read aquifer properties at 30 arc min resolution
+    #~ logger.info('Reading saturated conductivity and specific yield at 30 arc-min resolution!')
+    #~ saturated_conductivity = pcr.ifthen(landmask,\
+                             #~ vos.netcdf2PCRobjCloneWithoutTime(\
+                             #~ aquifer_properties_30min_netcdf['filename'],\
+                             #~ "kSatAquifer"  , clone_map_30min_file))
+    #~ specific_yield         = pcr.ifthen(landmask,\
+                             #~ vos.netcdf2PCRobjCloneWithoutTime(\
+                             #~ aquifer_properties_30min_netcdf['filename'],\
+                             #~ "specificYield", clone_map_30min_file))
 
-    # saving 30 min parameters to a netcdf file
-    logger.info('Saving groundwater parameter parameters to a netcdf file: '+output_30min_filename)
-    #
-    output_30min_netcdf = outputNetCDF.OutputNetCDF(clone_map_30min_file)
-    #
-    variable_names = ["saturated_conductivity","specific_yield","thickness"]
-    units = ["m/day","1","m"]
-    variable_fields = [
-                       pcr.pcr2numpy(saturated_conductivity, vos.MV),
-                       pcr.pcr2numpy(specific_yield        , vos.MV),
-                       pcr.pcr2numpy(thickness             , vos.MV),
-                       ]
-    pcr.report(saturated_conductivity, "saturated_conductivity_30min.map")
-    pcr.report(specific_yield        , "specific_yield_30min.map")
-    pcr.report(thickness             , "thickness_30min.map")
-    output_30min_netcdf.createNetCDF(   output_30min_filename,variable_names,units)
-    output_30min_netcdf.changeAtrribute(output_30min_filename,netcdf_attributes)
-    output_30min_netcdf.data2NetCDF(    output_30min_filename,variable_names,variable_fields)
+    #~ # saving 30 min parameters to a netcdf file
+    #~ logger.info('Saving groundwater parameter parameters to a netcdf file: '+output_30min_filename)
+    #~ #
+    #~ output_30min_netcdf = outputNetCDF.OutputNetCDF(clone_map_30min_file)
+    #~ #
+    #~ variable_names = ["saturated_conductivity","specific_yield","thickness"]
+    #~ units = ["m/day","1","m"]
+    #~ variable_fields = [
+                       #~ pcr.pcr2numpy(saturated_conductivity, vos.MV),
+                       #~ pcr.pcr2numpy(specific_yield        , vos.MV),
+                       #~ pcr.pcr2numpy(thickness             , vos.MV),
+                       #~ ]
+    #~ pcr.report(saturated_conductivity, "saturated_conductivity_30min.map")
+    #~ pcr.report(specific_yield        , "specific_yield_30min.map")
+    #~ pcr.report(thickness             , "thickness_30min.map")
+    #~ output_30min_netcdf.createNetCDF(   output_30min_filename,variable_names,units)
+    #~ output_30min_netcdf.changeAtrribute(output_30min_filename,netcdf_attributes)
+    #~ output_30min_netcdf.data2NetCDF(    output_30min_filename,variable_names,variable_fields)
 
 
 if __name__ == '__main__':
