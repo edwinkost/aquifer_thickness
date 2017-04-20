@@ -74,8 +74,10 @@ ldd_netcdf['variable_name']            = "lddMap"
 
 # table/figure of Margat
 margat_aquifers = {}
-margat_aquifers['shapefile'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/processing_whymap/whymap_wgs1984.shp"
-margat_aquifers['txt_table'] = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/processing_whymap/margat_table.txt"
+#~ margat_aquifers['shapefile'] = "/scratch/edwin/processing_whymap/version_19september2014/whymap_wgs1984.shp"
+#~ margat_aquifers['txt_table'] = "/scratch/edwin/processing_whymap/version_19september2014/table/margat_table.txt"
+margat_aquifers['shapefile']    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/processing_whymap/version_19september2014/whymap_wgs1984.shp"
+margat_aquifers['txt_table']    = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/users/edwin/data/processing_whymap/version_19september2014/table/margat_table.txt"
 
 # TODO: include the parameterization of kSat and Sy
 
