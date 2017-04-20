@@ -29,7 +29,11 @@ cleanOutputDir   = True
 #~ clone_map_file = "/data/hydroworld/others/RhineMeuse/RhineMeuse05min.clone.map"
 #~ clone_map_file = "/data/hydroworld/PCRGLOBWB20/input5min/routing/lddsound_05min.map"
 #~ clone_map_file = "/scratch/edwin/tmp/Australia05min.clone.map"
+#
+# - for the Global extent 
 #~ clone_map_file = "/scratch/edwin/processing_whymap/version_19september2014/water_polygon/water-polygons-split-4326/landmask_05min.map"
+#
+# - for the Rhine basin
 clone_map_file = "/p/1209496-pcrglobwb/pcrglobwb_data/dfguu/data/hydroworld/others/RhineMeuse/RhineMeuse05min.clone.map"
 
 # number_of_samples and option to include_percentile_report

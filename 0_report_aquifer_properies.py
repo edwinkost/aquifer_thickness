@@ -26,7 +26,7 @@ from logger import Logger
 #~ output_30min_filename = "/scratch/edwin/aquifer_properties/groundwater_properties_30min.nc"
 output_directory         = "/p/1209496-pcrglobwb/scratch_edwin/test_aquifer_properties/" 
 output_05min_filename    = output_directory + "/groundwater_properties_05min.nc"
-output_30min_filename    = output_directory + "/groundwater_properties_30min.nc"
+#~ output_30min_filename = output_directory + "/groundwater_properties_30min.nc"
 cleanOutputDir   = True
 
 # netcdf attributes:
@@ -101,8 +101,8 @@ def main():
     # read aquifer properties at 5 arc min resolution
     logger.info('Reading saturated conductivity and specific yield at 5 arc-min resolution!')
     saturated_conductivity = pcr.ifthen(landmask,\
-                             vos.netcdf2PCRobjCloneWithoutTime(\
-                             aquifer_properties_05min_netcdf['filename'],\
+                             vos.netcdf2PCRobjSCloneWithoutTime(\
+                             aquifer_properties_S05min_netcdf['filename'],\
                              "kSatAquifer"  , clone_map_05min_file))
     specific_yield         = pcr.ifthen(landmask,\
                              vos.netcdf2PCRobjCloneWithoutTime(\
